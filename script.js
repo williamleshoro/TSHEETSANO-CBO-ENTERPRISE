@@ -6,6 +6,48 @@
 
 document.addEventListener("DOMContentLoaded", function() {
 
+    // Lightweight image loading for faster initial page rendering
+    const lazyImagePlaceholder = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f5f5f5'/%3E%3Ccircle cx='400' cy='300' r='120' fill='%23d4af37' fill-opacity='0.16'/%3E%3C/svg%3E";
+    const lazyImages = Array.from(document.querySelectorAll('img:not([data-no-lazy])'));
+
+    if (lazyImages.length > 0 && 'IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+
+                const img = entry.target;
+                const src = img.getAttribute('data-src') || img.getAttribute('src');
+
+                if (src && src !== img.getAttribute('src')) {
+                    img.setAttribute('src', src);
+                    img.removeAttribute('data-src');
+                    img.classList.add('loaded');
+                }
+
+                observer.unobserve(img);
+            });
+        }, { rootMargin: '200px 0px' });
+
+        lazyImages.forEach(img => {
+            if (!img.getAttribute('src') || img.getAttribute('src').trim() === '') {
+                return;
+            }
+
+            const currentSrc = img.getAttribute('src');
+            if (currentSrc && currentSrc.startsWith('data:image')) {
+                return;
+            }
+
+            img.classList.add('lazy-image');
+            img.setAttribute('loading', 'lazy');
+            img.setAttribute('decoding', 'async');
+            img.setAttribute('fetchpriority', 'low');
+            img.setAttribute('data-src', currentSrc);
+            img.setAttribute('src', lazyImagePlaceholder);
+            imageObserver.observe(img);
+        });
+    }
+
     // 1. Single Page Application (SPA) Tab Routing Engine
     const header = document.getElementById("header");
     const navLinks = document.querySelectorAll(".nav-link");

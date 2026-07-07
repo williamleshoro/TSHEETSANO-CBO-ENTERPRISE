@@ -58,6 +58,17 @@ button {
     cursor: pointer;
 }
 
+.lazy-image {
+    background-color: var(--light-gray);
+    object-fit: cover;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    opacity: 0.95;
+}
+
+.lazy-image.loaded {
+    opacity: 1;
+}
+
 /* Helper Utilities */
 .text-center { text-align: center; }
 .text-gold { color: var(--gold) !important; }
