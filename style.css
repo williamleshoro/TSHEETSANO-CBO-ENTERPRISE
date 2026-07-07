@@ -497,7 +497,7 @@ button {
     width: 100%;
     max-width: 320px;
     height: 380px;
-    object-cover: cover;
+    object-fit: cover;
     border-radius: 1.5rem;
     border: 4px solid var(--white);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
@@ -717,7 +717,7 @@ button {
 
 .motto-text {
     font-family: var(--font-serif);
-    font-size: 1.75re;
+    font-size: 1.75rem;
     font-weight: 700;
     color: var(--white);
     margin: 0;

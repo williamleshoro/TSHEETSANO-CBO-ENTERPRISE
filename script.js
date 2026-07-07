@@ -81,10 +81,10 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
 
-        // Instant scroll-to-top so it behaves as a fresh page load
+        // Scroll to the top cleanly when switching sections
         window.scrollTo({
             top: 0,
-            behavior: "instant"
+            behavior: "auto"
         });
     }
 
