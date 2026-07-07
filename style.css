@@ -218,7 +218,7 @@ button {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-image: url('./assets/images/hero_community_farming_1780859152831.png');
+    background-image: url('./assets/IMAGE/hero-optimized.svg');
     background-size: cover;
     background-position: center;
     padding-top: 8rem;
